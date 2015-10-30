@@ -1,0 +1,32 @@
+# Tell Git to use its default newline-handling behaviour
+* text=auto
+
+# Force Unix-style line endings for obvious text files
+*.css     text eol=lf
+*.htm     text eol=lf
+*.html    text eol=lf
+*.js      text eol=lf
+*.php     text eol=lf
+*.svg     text eol=lf
+
+# Force Windows-style newlines for CSV files (RFC 4180)
+*.csv     text eol=crlf
+
+# Binary: Fonts
+*.afm     binary
+*.eot     binary
+*.otf     binary
+*.ttf     binary
+*.woff    binary
+*.woff2   binary
+
+# Binary: Images/Program assets
+*.ai      binary
+*.glyphs  binary
+*.png     binary
+*.psd     binary
+
+# Customise how Git handles diffs for certain binary formats
+*.ai      diff=exif
+*.png     diff=exif
+*.psd     diff=exif
