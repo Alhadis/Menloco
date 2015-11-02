@@ -5,7 +5,7 @@ use open         qw< :std  :utf8 >;
 use charnames    qw< :full >;
 use feature      qw< say unicode_strings >;
 use Getopt::Long qw< :config auto_abbrev >;
-
+use File::Basename;
 
 
 # Parse command-line options
@@ -21,29 +21,20 @@ my @preview_lines = <$preview_fh>;
 my $preview       = join "", @preview_lines;
 
 
-# Generate the HTML to send to STDOUT
-my $template = <<EOF;
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Font Preview</title>
-<style>
-\@font-face{ font-family: "$old"; src: url("$old.ttf") format("truetype"); }
-\@font-face{ font-family: "$new"; src: url("$new.ttf") format("truetype"); }
-body{
-	white-space: pre;
-	font: 1em/1 "$old";
+# Load the HTML template for displaying/previewing the generated font
+chdir(dirname($0));
+open(my $template_fh, "< :encoding(UTF-8)", "preview-template.htm");
+my @template_lines = <$template_fh>;
+my $template       = join "", @template_lines;
+my %tokens         = (
+	"old"  => $old,
+	"new"  => $new,
+	"text" => $preview
+);
+for my $key (sort keys %tokens){
+	$template =~ s/\$$key/$tokens{$key}/ge;
 }
-.result{ font-family: "$new"; }
-.l{ font-size: 4em; }
-</style>
-</head>
-
-<body class="result"><div class="s">$preview</div><div class="l">$preview</div></body>
-<script>window.onclick=function(){document.body.classList.toggle("result");}</script>
-</html>
-EOF
 
 
+# Send to STDOUT
 print STDOUT "$template\n";

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Font Preview</title>
+<style>
+@font-face{ font-family: "$old"; src: url("$old.ttf") format("truetype"); }
+@font-face{ font-family: "$new"; src: url("$new.ttf") format("truetype"); }
+*{
+	padding: 0;
+	margin: 0;
+	tab-size: 4;
+	box-sizing: border-box;
+}
+div{
+	white-space: pre;
+	font: 1em/1 "$old";
+}
+.result > div{ font-family: "$new"; }
+.m{ font-size: 2em; }
+.l{ font-size: 4em; }
+</style>
+</head>
+
+
+<body class="result">
+	<h1>Showing: <span></span></h1>
+	<small>(Click anywhere on the page to toggle)</small>
+
+	<div>$text</div>
+	<div class="m">$text</div>
+	<div class="l">$text</div>
+
+	<script>(function(){
+		var showPreview;
+		var showName = document.querySelector("h1 > span");
+
+		Object.defineProperty(window, "showPreview", {
+			get: function(){ return showPreview },
+			set: function(i){
+				showPreview = i;
+				document.body.classList.toggle("result", !!i);
+				showName.textContent = i ? "$new" : "$old";
+			}
+		});
+
+		window.onclick = function(){ window.showPreview = !window.showPreview; }
+		window.showPreview = true;
+	}());
+	</script>
+</body>
+</html>

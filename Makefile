@@ -19,8 +19,8 @@ subset: $(SUBSET)
 
 # Generates an HTML page displaying the generated font and opens it
 preview: tests/glyph-test.txt
-	@utils/preview-font.pl --old=$(FROM) --new=$(RESULT) --preview-file=$< > $(OBJDIR)/preview.htm
-	open $(OBJDIR)/preview.htm
+	@utils/preview-font.pl --old=$(INTO) --new=$(RESULT) --preview-file=$< > $(OBJDIR)/preview.htm
+	@open $(OBJDIR)/preview.htm
 
 
 # Use FontForge to transfer fonts from Menlo into a copy of Monaco
