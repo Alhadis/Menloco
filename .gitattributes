@@ -1,3 +1,6 @@
+# Prevent test files being evaluated by Linguist
+tests/* linguist-documentation
+
 # Tell Git to use its default newline-handling behaviour
 * text=auto
 
