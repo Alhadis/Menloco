@@ -63,7 +63,7 @@ path=$(find_font "$font_name" 2>/dev/null)
 [ $? -eq 0 ] && {
 	mkdir -p $(dirname $copy_to)
 	
-	file "$path" | grep -iE '(Open|True)Type' && {
+	file "$path" | grep -iE '(Open|True)Type' | grep -vi 'font collection' && {
 		cp "$path" $copy_to;
 	} || {
 		fontforge -nosplash -lang=ff -c 'Open($1); Generate($2);' 2>/dev/null "$path" $copy_to
