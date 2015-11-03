@@ -51,6 +51,15 @@ $(OBJDIR)/%.ttx: $(SUBSET)
 	perl -p -i -e 's/\x20{2}/\t/g' $@
 
 
+# Extract every subsetted glyph as an SVG file
+svg: $(OBJDIR)/$(FROM).ttf $(SUBSET_LIST)
+	@mkdir -p $(OBJDIR)/svg
+	@utils/ff-extract.py \
+		--font-file=$(OBJDIR)/$(FROM).ttf \
+		--save-to=$(OBJDIR)/svg \
+		--glyphs-file=$(SUBSET_LIST)
+
+
 # Wipe the slate clean
 clean:
 	@rm -rf $(wildcard $(OBJDIR))
