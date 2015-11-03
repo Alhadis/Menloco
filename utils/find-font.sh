@@ -1,9 +1,5 @@
 #!/bin/sh
 
-font_name=$1
-copy_to=$2
-
-
 # Echoes the full path of the first font whose filename contains a given string
 find_font(){
 
@@ -53,10 +49,23 @@ find_font(){
 }
 
 
-path=$(find_font "$1" 2>/dev/null)
 
-file "$path" | grep -iE '(Open|True)Type' && {
-	cp "$path" $copy_to;
-} || {
-	fontforge -nosplash -lang=ff -c 'Open($1); Generate($2);' 2>/dev/null "$path" $copy_to
+# Label our arguments with something more readable
+font_name=$1
+copy_to=$2
+
+
+# Find where the queried font lives
+path=$(find_font "$font_name" 2>/dev/null)
+
+
+# Make sure we found something before continuing
+[ $? -eq 0 ] && {
+	mkdir -p $(dirname $copy_to)
+	
+	file "$path" | grep -iE '(Open|True)Type' && {
+		cp "$path" $copy_to;
+	} || {
+		fontforge -nosplash -lang=ff -c 'Open($1); Generate($2);' 2>/dev/null "$path" $copy_to
+	};
 };

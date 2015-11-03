@@ -53,7 +53,8 @@ $(OBJDIR)/%.ttx: $(SUBSET)
 
 # Wipe the slate clean
 clean:
-	@rm -rf $(wildcard $(OBJDIR)/*)
+	@rm -rf $(wildcard $(OBJDIR))
+	
 
 
 # Verifies the availability of programs needed to run these tasks
