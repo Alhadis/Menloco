@@ -55,9 +55,3 @@ Wanting the best of both worlds, I penned these scripts to bring them together.
 Obviously I could simply upload the modified typeface, but that'd be infringing
 copyright. Since both fonts are already installed on Mac OS by default, it's an
 easy matter of running the bundled scripts with `make`.
-
-
-Known issues
-------------
-Yes, I'm fully aware there're *still* gaps between the box drawing characters.
-About to fix that in an impending commit, since I'm a stubborn, obsessive twat.

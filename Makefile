@@ -13,7 +13,7 @@ NEEDED_ERROR := "ERROR: One or more required tools are unavailable:\n\t"
 
 
 # Primary tasks
-all:         check merge preview
+all:         check extend merge preview
 preview:     $(OBJDIR)/preview.htm
 xml:         $(OBJDIR)/$(FROM).ttx
 subset:      $(SUBSET)
@@ -58,6 +58,11 @@ svg: $(OBJDIR)/$(FROM).ttf $(SUBSET_LIST)
 		--font-file=$(OBJDIR)/$(FROM).ttf \
 		--save-to=$(OBJDIR)/svg \
 		--glyphs-file=$(SUBSET_LIST)
+
+
+# Stretch the vertical extents of each box-drawing glyph
+extend: $(OBJDIR)/$(FROM).ttf
+	@utils/ff-extend.py $<
 
 
 # Wipe the slate clean
