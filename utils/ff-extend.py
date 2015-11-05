@@ -169,7 +169,7 @@ charMap = {
 };
 
 for char in charMap:
-	offsetEdge(charMap[char], f[char], 150);
+	offsetEdge(charMap[char], f[char], float(sys.argv[2]));
 
 
 f.generate(sys.argv[1]);

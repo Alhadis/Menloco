@@ -1,6 +1,7 @@
-FROM    := Menlo
-INTO    := Monaco
-RESULT  := Menloco
+FROM         := Menlo
+INTO         := Monaco
+RESULT       := Menloco
+EXTEND_BY    := 150
 
 # Paths
 OBJDIR       := fonts
@@ -62,7 +63,7 @@ svg: $(OBJDIR)/$(FROM).ttf $(SUBSET_LIST)
 
 # Stretch the vertical extents of each box-drawing glyph
 extend: $(OBJDIR)/$(FROM).ttf
-	@utils/ff-extend.py $<
+	@[ $(EXTEND_BY) -gt 0 ] && { utils/ff-extend.py $< $(EXTEND_BY); } ||:
 
 
 # Wipe the slate clean
