@@ -51,5 +51,9 @@ for g in glyphs:
 	into.selection.select(("unicode",), ord(g))
 	into.paste()
 
+	# Match the advance width of inserted glyphs to what the target font has
+	# set on the uppercase 'E' glyph
+	into[ord(g)].width = into[0x50].width
+
 into.fontname = into.fondname = into.familyname  = into.fullname = font_name
 into.generate(save_to)
