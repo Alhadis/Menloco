@@ -1,16 +1,17 @@
-FROM         := Menlo
-INTO         := Monaco
-RESULT       := Menloco
-EXTEND_BY    := 150
+FROM            := Menlo
+INTO            := Monaco
+RESULT          := Menloco
+EXTEND_BY       := 150
+TRIANGLE_OFFSET := 50
 
 # Paths
-OBJDIR       := fonts
-SUBSET       := $(OBJDIR)/$(FROM)-subset.ttf
-SUBSET_LIST  := glyph-list.txt
+OBJDIR          := fonts
+SUBSET          := $(OBJDIR)/$(FROM)-subset.ttf
+SUBSET_LIST     := glyph-list.txt
 
 # Programs that this makefile relies on to execute its tasks
-NEEDED_TOOLS := perl fontforge python
-NEEDED_ERROR := "ERROR: One or more required tools are unavailable:\n\t"
+NEEDED_TOOLS    := perl fontforge python
+NEEDED_ERROR    := "ERROR: One or more required tools are unavailable:\n\t"
 
 
 # Primary tasks
@@ -63,13 +64,13 @@ svg: $(OBJDIR)/$(FROM).ttf $(SUBSET_LIST)
 
 # Stretch the vertical extents of each box-drawing glyph
 extend: $(OBJDIR)/$(FROM).ttf
-	@[ $(EXTEND_BY) -gt 0 ] && { utils/ff-extend.py $< $(EXTEND_BY); } ||:
+	@[ $(EXTEND_BY) -gt 0 ] && { utils/ff-extend.py $< $(EXTEND_BY) $(TRIANGLE_OFFSET); } ||:
 
 
 # Wipe the slate clean
 clean:
 	@rm -rf $(wildcard $(OBJDIR))
-	
+
 
 
 # Verifies the availability of programs needed to run these tasks

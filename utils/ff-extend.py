@@ -23,7 +23,7 @@ def getExtents( glyph ):
 	for layer in glyph.layers:
 		for contour in glyph.layers[layer]:
 			for point in contour:
-				
+
 				if point.y < min:
 					min = point.y;
 				elif point.y > max:
@@ -35,19 +35,30 @@ def getExtents( glyph ):
 # Nudge the Y-position of a glyph's outer-most points
 def offsetEdge( edges, glyph, offset ):
 	(minY, maxY) = getExtents(glyph);
-	
+
 	for layerName in glyph.layers:
 		layer = glyph.layers[layerName];
 
 		for contour in layer:
 			for point in contour:
-				
+
 				if (OFFSET_BOTTOM & edges) and point.y <= minY:
 					point.y -= offset;
 				if (OFFSET_TOP & edges) and point.y >= maxY:
 					point.y += offset;
-					
-		
+
+
+		glyph.layers[layerName] = layer;
+
+# Offset all points' y-values of a glphy
+def offsetY( glyph, offset ):
+	for layerName in glyph.layers:
+		layer = glyph.layers[layerName];
+
+		for contour in layer:
+			for point in contour:
+				point.y += offset;
+
 		glyph.layers[layerName] = layer;
 
 
@@ -168,9 +179,18 @@ charMap = {
 	0x257F: OFFSET_BOTH
 };
 
+triangleCharacters = [
+	0x25b6,
+	0x25b7,
+	0x25c0,
+	0x25c1,
+]
+
 for char in charMap:
 	offsetEdge(charMap[char], f[char], float(sys.argv[2]));
 
+for char in triangleCharacters:
+	offsetY(f[char], float(sys.argv[3]));
 
 f.generate(sys.argv[1]);
 f.close();
