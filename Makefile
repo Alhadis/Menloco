@@ -15,7 +15,7 @@ NEEDED_ERROR    := "ERROR: One or more required tools are unavailable:\n\t"
 
 
 # Primary tasks
-all:         check extend merge preview
+all:         check clean extend merge preview
 preview:     $(OBJDIR)/preview.htm
 xml:         $(OBJDIR)/$(FROM).ttx
 subset:      $(SUBSET)
