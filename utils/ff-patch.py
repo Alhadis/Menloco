@@ -1,14 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import fontforge
 import getopt
 import re
 import sys
-
-
-# Set UTF-8 encoding
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 
 take        = ""
@@ -37,7 +32,7 @@ for key, value in options:
 
 # List of glyphs to extract from target file
 glyphs = open(glyphs_file, "r").read()
-glyphs = unicode(re.sub(ur"\s+", "", glyphs), "utf-8")
+glyphs = re.sub(r"\s+", "", glyphs)
 
 
 # Load both fonts in FontForge

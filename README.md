@@ -37,7 +37,7 @@ interested in running it on another operating system, you'll need the following
 in addition to FontForge:
 
 1. Perl v5.10+
-2. Python v2.7+
+2. Python v3.6+
 3. [GNU Make](https://www.gnu.org/software/make/manual/make.html)
 
 For Windows/Cygwin, I have no idea. Have a crack at it and report any troubles.

@@ -1,12 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import fontforge
 import re
 import sys
-
-
-# Set UTF-8 encoding
-reload(sys)
-sys.setdefaultencoding("utf8")
 
 
 # Assign a new name to the font
